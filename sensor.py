@@ -15,13 +15,21 @@ class Sensor(MethodView):
 
     def post(self):
         sensorid='002'
-        print(request.data)
         return jsonify(
                  code='200',
                  message='Sensor registered ' + sensorid + '.',
-                 payload=request.data
+                 data=request.data
                 )   
     
-    #def put(self):
-    #def delete(self):
-        
+    def put(self,sensorid):
+        return jsonify(
+                 code='200',
+                 message='Sensor ' + sensorid + ' info updated.',
+                 data=request.data
+                )   
+    
+    def delete(self, sensorid):
+        return jsonify(
+                 code='200',
+                 message='Sensor ' + sensorid + ' removed.',
+                )   
