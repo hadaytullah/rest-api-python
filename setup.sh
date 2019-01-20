@@ -6,3 +6,10 @@ sudo apt-get install python3.6
 
 export FLASK_APP=app.py
 export FLASK_ENV=development #change to production when in production
+
+#To run the app
+#flask run -p 8080 
+#OR
+#python3 app.py
+
+#Development: on cloud 9 server just press run button

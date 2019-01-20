@@ -4,9 +4,10 @@ A rest api written in python. See the setup.sh to setup your development environ
 ## To run the app
 
 ```
+pip install
 export FLASK_APP=app.py
 export FLASK_ENV=development
-python3 app.py
+python app.py
 ```
 
 ## Cloud9 Development
