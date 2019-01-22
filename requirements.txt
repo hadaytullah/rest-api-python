@@ -1,3 +1,4 @@
+pymongo==3.7.0
 BzrTools==2.6.0
 Pillow==2.3.0
 PyJWT==1.7.1
