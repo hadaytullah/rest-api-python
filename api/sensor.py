@@ -4,8 +4,9 @@ from flask.views import MethodView
 from flask import jsonify
 from flask import request
 from flask import abort, make_response
-from database import db
 from bson.objectid import ObjectId
+from shared import db, log
+
 class Sensor(MethodView):
     """
         Sensor api entry points handler, GET,POST,PUT,DELETE
@@ -24,17 +25,15 @@ class Sensor(MethodView):
                     }
                 )
             else:
+                log.info('Sensor not found in the database. {}'.format(sensor_id))
                 
                 return abort(make_response(jsonify(
                     string_code='NOT_FOUND',
                     message='Sensor does not exist.'
                 ),404))
         except Exception as e: #NOTE: can't catch KeyboardInterrupt and SystemExit
-            # TODO: add a logger to log this error
-            #print( e.args)
-            #print( e.__doc__)
-            #print( e.message)
-            # logger.log("Exception occured in Sensor.get {}".format(sensor_id))
+            
+            log.error(traceback.format_exc())
             
             # do not expose what went wrong to the callee
             return abort(make_response(jsonify(
@@ -43,15 +42,6 @@ class Sensor(MethodView):
                 data=None
             ),500))
     
-    def _post(self):
-        sensorid='002'
-        print(request.data)
-        return jsonify(
-                 code='200',
-                 message='Sensor registered ' + sensorid + '.',
-                 data=request.data,
-                )   
-            
     def post(self):
         try:
             # encode/decode
@@ -73,8 +63,9 @@ class Sensor(MethodView):
                 )
             else:
                 # do not expose what went wrong to the callee, use a logger to log it for internal use
-                print('Unable to insert data into db')
-                print(request.data)
+                log.info('Unable to insert data into db')
+                log.info(request.data)
+                
                 return abort(make_response(jsonify(
                     string_code='SERVER_ERROR',
                     message='Something went wrong.',
@@ -83,10 +74,8 @@ class Sensor(MethodView):
             
         except Exception as e: #NOTE: can't catch KeyboardInterrupt and SystemExit
             # do not expose what went wrong to the callee, use a logger to log it for internal use
-            print(e.args)
-            print(e.__doc__)
-            #print(e.message)
-            print(traceback.format_exc())
+            log.error(traceback.format_exc())
+            
             return abort(make_response(jsonify(
                 string_code='SERVER_ERROR',
                 message='Something went wrong.',

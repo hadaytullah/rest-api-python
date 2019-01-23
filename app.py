@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 import jwt
-from sensor import Sensor
+from api.sensor import Sensor
 
 app = Flask(__name__)
 
