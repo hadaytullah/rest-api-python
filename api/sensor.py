@@ -83,15 +83,16 @@ class Sensor(MethodView):
             ),500))
             
         
-    def put(self,sensorid):
-        return jsonify(
-                 code='200',
-                 message='Sensor ' + sensorid + ' info updated.',
-                 data=request.data
-                )   
+    def put(self, sensor_id):
+        return abort(make_response(jsonify(
+            string_code='NOT_IMPLEMENTED',
+            message='This api endpoint has not been implemented.',
+            data=None
+        ),501))
     
-    def delete(self, sensorid):
-        return jsonify(
-                 code='200',
-                 message='Sensor ' + sensorid + ' removed.',
-                )   
+    def delete(self, sensor_id):
+        return abort(make_response(jsonify(
+            string_code='NOT_IMPLEMENTED',
+            message='This api endpoint has not been implemented.',
+            data=None
+        ),501))
