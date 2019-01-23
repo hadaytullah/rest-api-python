@@ -9,7 +9,9 @@ from shared import db, log
 from datetime import datetime, timedelta
 import jwt
 
+#TODO: Store the key as an env variable on production machine
 JWT_SECRET = 'Ki39krMoE534' 
+
 JWT_ALGORITHM = 'HS256'
 JWT_EXP_DELTA_SECONDS = 20
 
