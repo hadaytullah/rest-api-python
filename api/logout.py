@@ -7,24 +7,19 @@ from flask import abort, make_response
 from bson.objectid import ObjectId
 from shared import db, log
 
-class Data(MethodView):
+class Logout(MethodView):
     """
-        Data api entry points handler, GET,POST,PUT,DELETE
-        
-        sample data point
-        {
-        	"sensor_id":"5c473aa0963784b921dbb44c",
-	        "speed":"70",
-	        "speed_unit":"kmh",
-	        "location":{
-		        "lat":"65.850015",
-		        "lng":"27.590382"
-	        },
-	        "location_accuracy":"1200.4"
-        }
+        Logout api entry points handler, GET,POST,PUT,DELETE
     """
 
     def post(self):
+        return abort(make_response(jsonify(
+            string_code='NOT_IMPLEMENTED',
+            message='This api endpoint has not been implemented.',
+            data=None
+        ),501))
+    
+    def post_(self):
         try:
             # encode/decode
             print(request.data.decode('utf-8'))
@@ -67,23 +62,4 @@ class Data(MethodView):
                 data=None
             ),500))
             
-    def get(self, sensor_id):
-       return abort(make_response(jsonify(
-            string_code='NOT_IMPLEMENTED',
-            message='This api endpoint has not been implemented.',
-            data=None
-        ),501))
-        
-    def put(self, sensor_id):
-        return abort(make_response(jsonify(
-            string_code='NOT_IMPLEMENTED',
-            message='This api endpoint has not been implemented.',
-            data=None
-        ),501))
-    
-    def delete(self, sensor_id):
-        return abort(make_response(jsonify(
-            string_code='NOT_IMPLEMENTED',
-            message='This api endpoint has not been implemented.',
-            data=None
-        ),501))
+  
