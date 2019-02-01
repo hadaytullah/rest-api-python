@@ -5,15 +5,11 @@ from flask import jsonify
 from flask import request
 from flask import abort, make_response
 from bson.objectid import ObjectId
-from shared import db, log
+from shared import db, log, jwt_config
 from datetime import datetime, timedelta
 import jwt
 
-#TODO: Store the key as an env variable on production machine
-JWT_SECRET = 'Ki39krMoE534' 
 
-JWT_ALGORITHM = 'HS256'
-JWT_EXP_DELTA_SECONDS = 20
 
 class Login(MethodView):
     """
@@ -41,10 +37,10 @@ class Login(MethodView):
                 # TODO: the transition from user to sensor is a bit confusing, improve please
                 payload = {
                     'sensor_id': user_data['sensor_id'],
-                    'exp': datetime.utcnow() + timedelta(seconds=JWT_EXP_DELTA_SECONDS)
+                    'exp': datetime.utcnow() + timedelta(seconds=jwt_config['expiration_delta_seconds'])
                 }
-                
-                jwt_token = jwt.encode(payload, JWT_SECRET, JWT_ALGORITHM)
+                print('keys--{} {}'.format(jwt_config['secret'], jwt_config['algo']))
+                jwt_token = jwt.encode(payload, jwt_config['secret'], jwt_config['algo'])
                 return jsonify(
                     token = jwt_token.decode('utf-8')
                 )
