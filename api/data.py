@@ -24,14 +24,14 @@ class Data(MethodView):
         }
     """
 
-    def post(self):
+    def post(self, sensor_id):
         try:
             # encode/decode
             print(request.data.decode('utf-8'))
             data_dict = json.loads(request.data.decode('utf-8'))
             # Store data
             document = db.data.insert_one({
-                'sensor_id':data_dict['sensor_id'],
+                'sensor_id':sensor_id,
                 'speed':data_dict['speed'],
                 'speed_unit': data_dict['speed_unit'],
                 'location':data_dict['location'],

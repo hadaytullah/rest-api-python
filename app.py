@@ -5,8 +5,10 @@ from api.sensor import Sensor
 from api.data import Data
 from api.login import Login
 from api.logout import Logout
+from api.auth import Auth
 
 app = Flask(__name__)
+auth = Auth()
 
 #routes        
 @app.route('/')
@@ -34,7 +36,7 @@ app.add_url_rule('/sensors/<sensor_id>', view_func=sensor_view_func, methods=['G
 #app.add_url_rule('/sensor/<sensor_id>/data', view_func=data_view_func, methods=['POST',])
 
 # sensor data api
-data_view_func = Data().as_view('data')
+data_view_func = auth.authenticate(Data().as_view('data'))
 #app.add_url_rule('/data/', defaults={'sensor_id':None}, view_func=data_view_func, methods=['GET',])
 app.add_url_rule('/data', view_func=data_view_func, methods=['POST',])
 #app.add_url_rule('/data/<sensor_id>/', view_func=data_view_func, methods=['GET', 'PUT', 'DELETE'])

@@ -21,7 +21,7 @@ try:
     jwt_config = {
         'secret': JWT_SECRET,
         'algo': 'HS256',
-        'expiration_delta_seconds': 20
+        'expiration_delta_seconds': 1800
         
     }
 except KeyError:
