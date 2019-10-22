@@ -1,6 +1,6 @@
 pymongo==3.7.0
 BzrTools==2.6.0
-Pillow==2.3.0
+Pillow==6.2.0
 PyJWT==1.7.1
 SecretStorage==2.0.0
 argparse==1.2.1
